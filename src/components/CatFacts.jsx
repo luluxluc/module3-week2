@@ -22,7 +22,20 @@ function CatFacts() {
         setCurrentIndex(randomIndex);
       })
       .catch((err) => {
-        setError(err.message);
+        console.error("API error:", err.message);
+        setError("Kunne ikke hente fakta fra API, viser lokale fakta i stedet.");
+
+        // 💡 Mock-dataset (fallback)
+        const fallbackFacts = [
+          { fact: "Cats sleep for around 13 to 14 hours a day." },
+          { fact: "A group of cats is called a clowder." },
+          { fact: "Cats have five toes on their front paws, but only four on the back." },
+          { fact: "A cat can jump up to six times its length in one leap." },
+          { fact: "The oldest known pet cat existed 9,500 years ago." },
+        ];
+
+        setFacts(fallbackFacts);
+        setCurrentIndex(Math.floor(Math.random() * fallbackFacts.length));
         setLoading(false);
       });
   };
@@ -42,21 +55,23 @@ function CatFacts() {
       <h2>Cat Facts</h2>
 
       {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>Error: {error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {!loading && !error && (
+      {!loading && facts.length > 0 && (
         <button
-        onClick={nextFact}
-        style={{
-            marginBottom:"1rem",
+          onClick={nextFact}
+          style={{
+            marginBottom: "1rem",
             padding: "0.5rem 1rem",
             cursor: "pointer",
             borderRadius: "6px",
             border: "1px solid #49331bff",
             backgroundColor: "#dda66cff",
-            color: "#fff"
-        }}
-        >New Fact</button>
+            color: "#fff",
+          }}
+        >
+          New Fact
+        </button>
       )}
 
       <ul style={{ listStyle: "none", padding: 0 }}>
@@ -69,6 +84,7 @@ function CatFacts() {
                 padding: "0.5rem",
                 backgroundColor: "#49331bff",
                 borderRadius: "6px",
+                color: "white",
               }}
             >
               {fact.fact}
