@@ -1,4 +1,4 @@
-import cookieImg from "../public/cookie-1.png";
+import cookieImg from "../assets/cookie-1.png";
 
 function CookieClicker({ count, setCount}) {
 
