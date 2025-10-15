@@ -1,3 +1,5 @@
+import cookieImg from "../public/cookie-1.png";
+
 function CookieClicker({ count, setCount}) {
 
     const handleClick = () => {
@@ -16,11 +18,7 @@ function CookieClicker({ count, setCount}) {
                 cursor: "pointer",
             }}
             >
-                <img
-                src="/cookie.png"
-                alt="cookie"
-                style={{ width: "150px", height: "150px" }}
-                />
+                <img src={cookieImg} alt="cookie" style={{ width: "150px", height: "150px" }} />
             </button>
 
             <p>You have clicked {count} times!</p>
